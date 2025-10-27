@@ -4,6 +4,21 @@
 
 This is a mobile-first retail product data collection web application designed for Russian-speaking users. The application enables users to scan product barcodes using their mobile device camera, input product details through an optimized form interface, and maintain a searchable history of scanned products. Built with a React frontend and Express backend, it leverages PostgreSQL for persistent data storage and follows Material Design principles for an efficient mobile scanning workflow.
 
+## Recent Changes (October 27, 2025)
+
+**Bug Fixes & Improvements:**
+- Fixed TypeScript type error in toast notifications (home.tsx)
+- Enhanced camera error handling with specific error messages for different failure scenarios
+- Added HTTPS/secure context check for camera access with informative user messaging
+- Improved API security by removing detailed internal error messages from responses
+- Added audio feedback: plays a 1000Hz beep sound on successful barcode scan
+- Implemented comprehensive error diagnostics for camera permissions, device availability, and browser compatibility
+
+**Security Enhancements:**
+- Error responses sanitized to prevent information leakage
+- Validation error details limited to path and message only
+- Server-side logging preserved for debugging while client receives user-friendly messages
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
@@ -31,6 +46,8 @@ Preferred communication style: Simple, everyday language.
 - **Mobile-First Approach:** All interactions optimized for single-hand phone operation with large touch targets and clear visual hierarchy
 - **Component Library Choice:** Shadcn/ui chosen over pre-built libraries for flexibility and customization while maintaining accessibility through Radix UI
 - **Russian Localization:** Full Cyrillic character support with Russian-language labels, error messages, and interface text
+- **Multi-Sensory Feedback:** Combines audio (beep sound), haptic (vibration), and visual feedback for successful scans
+- **HTTPS Requirement:** Camera access requires secure context (HTTPS) - preview mode may not support camera, requires published deployment
 
 ### Backend Architecture
 
@@ -84,3 +101,5 @@ Preferred communication style: Simple, everyday language.
 - Camera API accessed through html5-qrcode for barcode scanning with fallback to manual entry
 - WebSocket connections for PostgreSQL via Neon's serverless driver enabling connection pooling
 - Google Fonts CDN for Roboto font family supporting Cyrillic character sets
+- Web Audio API for generating beep sound feedback on successful scans
+- MediaDevices API for camera access, torch/flashlight control, and video streaming

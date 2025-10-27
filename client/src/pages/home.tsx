@@ -7,7 +7,7 @@ import { ExportModal } from "@/components/export-modal";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Product, InsertProduct } from "@shared/schema";
-import { ScanBarcode, Download, CheckCircle } from "lucide-react";
+import { ScanBarcode, Download } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -30,12 +30,7 @@ export default function Home() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/products"] });
       toast({
-        title: (
-          <div className="flex items-center gap-2">
-            <CheckCircle className="h-5 w-5 text-green-600" />
-            <span>Товар успешно добавлен</span>
-          </div>
-        ),
+        title: "Товар успешно добавлен",
         description: "Можете перейти к следующему сканированию",
       });
       // Reset form

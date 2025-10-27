@@ -13,8 +13,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching products:", error);
       res.status(500).json({ 
-        error: "Ошибка получения товаров",
-        message: error instanceof Error ? error.message : "Неизвестная ошибка"
+        error: "Ошибка получения товаров"
       });
     }
   });
@@ -35,13 +34,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         return res.status(400).json({
           error: "Ошибка валидации данных",
-          details: error.errors,
+          details: error.errors.map(e => ({
+            path: e.path.join('.'),
+            message: e.message
+          })),
         });
       }
       
       res.status(500).json({ 
-        error: "Ошибка создания товара",
-        message: error instanceof Error ? error.message : "Неизвестная ошибка"
+        error: "Ошибка создания товара"
       });
     }
   });
